@@ -1,0 +1,30 @@
+name: Daily vacancy scan
+
+on:
+  schedule:
+    - cron: "0 3 * * *"  # 06:00 Moscow time (UTC+3 year-round)
+  workflow_dispatch: {}
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install -r requirements.txt
+
+      - run: python main.py
+        env:
+          TG_API_ID: ${{ secrets.TG_API_ID }}
+          TG_API_HASH: ${{ secrets.TG_API_HASH }}
+          TG_SESSION_STRING: ${{ secrets.TG_SESSION_STRING }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_MODEL: ${{ secrets.OPENROUTER_MODEL }}
+          FOLDER_NAME: ${{ secrets.FOLDER_NAME }}
+          KEYWORDS: ${{ secrets.KEYWORDS }}
+          LOOKBACK_HOURS: ${{ secrets.LOOKBACK_HOURS }}
+          OPENROUTER_LOW_BALANCE_THRESHOLD: ${{ secrets.OPENROUTER_LOW_BALANCE_THRESHOLD }}
