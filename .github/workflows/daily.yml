@@ -1,8 +1,13 @@
 name: Daily vacancy scan
 
 on:
-  schedule:
-    - cron: "0 3 * * *"  # 06:00 Moscow time (UTC+3 year-round)
+  # No `schedule:` trigger by default — this is a template repo with no
+  # secrets configured, so a cron trigger would just fail daily and spam
+  # whoever owns the fork with failure emails. Once you've cloned this,
+  # filled in your own .env, and pushed your own secrets (see README), add
+  # back a schedule trigger, e.g.:
+  #   schedule:
+  #     - cron: "0 3 * * *"  # 06:00 Moscow time (UTC+3 year-round)
   workflow_dispatch: {}
 
 jobs:

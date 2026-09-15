@@ -117,9 +117,18 @@ for k, v in vals.items():
 "
 ```
 
-The included `.github/workflows/daily.yml` runs on a daily cron
-(`0 3 * * *` UTC by default — edit that line for your own timezone) plus
-`workflow_dispatch` for manual runs:
+The included `.github/workflows/daily.yml` ships with **no cron schedule**
+on purpose — until you've pushed your own secrets (above), a scheduled run
+would just fail daily and spam you with failure emails. It only has
+`workflow_dispatch` (manual runs) for now. Once your secrets are set, add a
+schedule trigger back in, e.g.:
+
+```yaml
+on:
+  schedule:
+    - cron: "0 3 * * *"  # 06:00 Moscow time — pick your own UTC offset
+  workflow_dispatch: {}
+```
 
 ```bash
 gh workflow run daily.yml           # run it right now
