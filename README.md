@@ -21,6 +21,36 @@ against your profile), and sends matches to your own Telegram Saved Messages
 There's no web UI, no database, no separate channel config — the Telegram
 folder and `profile.md` are the only two things you maintain day to day.
 
+## Easiest way to set this up: use an AI coding agent
+
+You don't need to know how to code to get this running. Clone the repo,
+open the folder in **Claude Code** or **Codex** (or any similar coding
+agent), and tell it: *"follow the README and set this bot up for me."* It
+can do almost all of the setup below on its own.
+
+**The agent can do for you:**
+- clone the repo, create the virtualenv, install dependencies
+- write `.env`, run the session-string script
+- write/edit `profile.md` based on you describing your background and
+  what you're looking for out loud
+- create the GitHub repo, push your secrets, wire up deployment
+- test it end to end and show you the result
+
+**Only you can do these few things** (a handful of minutes, no coding
+involved):
+- log into [my.telegram.org](https://my.telegram.org) with your own phone
+  number and create an API app (step 1 below)
+- type in the one-time login code Telegram texts to your phone when the
+  agent generates the session string (step 4) — this is a security step,
+  the agent genuinely cannot see it for you
+- create an OpenRouter account and add a few dollars of credit (step 2) —
+  a payment step, not something to hand to an agent
+- approve one browser login for GitHub (step 7) — one click
+
+Everything else below is exactly what the agent will do for you — it's
+here so you know what's happening, not because you have to type it
+yourself.
+
 ## Setup
 
 ### 1. Telegram API credentials
