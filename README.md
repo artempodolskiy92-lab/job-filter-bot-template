@@ -30,7 +30,7 @@ can do almost all of the setup below on its own.
 
 **The agent can do for you:**
 - clone the repo, create the virtualenv, install dependencies
-- write `.env`, run the session-string script
+- write `.env`
 - write/edit `profile.md` based on you describing your background and
   what you're looking for out loud
 - create the GitHub repo, push your secrets, wire up deployment
@@ -40,9 +40,14 @@ can do almost all of the setup below on its own.
 involved):
 - log into [my.telegram.org](https://my.telegram.org) with your own phone
   number and create an API app (step 1 below)
-- type in the one-time login code Telegram texts to your phone when the
-  agent generates the session string (step 4) — this is a security step,
-  the agent genuinely cannot see it for you
+- **run the session-string script yourself, in your own terminal — not
+  through the agent** (step 4). This script needs to interactively ask for
+  your phone number and then a login code in real time. Coding agents run
+  shell commands in their own sandboxed terminal, where that kind of
+  back-and-forth input reliably breaks or hangs — it can look exactly like
+  "Telegram isn't sending the code" when actually the phone number/code
+  never made it to Telegram at all. Ask the agent to print the exact
+  command, then paste and run it yourself in a normal terminal window.
 - create an OpenRouter account and add a few dollars of credit (step 2) —
   a payment step, not something to hand to an agent
 - approve one browser login for GitHub (step 7) — one click
@@ -86,7 +91,19 @@ cp .env.example .env
 
 Fill in `TG_API_ID`, `TG_API_HASH`, `OPENROUTER_API_KEY`, `FOLDER_NAME`,
 `KEYWORDS` in `.env`. Then generate the session string (one-time interactive
-login — Telegram will text/message you a login code to enter):
+login):
+
+> **Run this command yourself, in a real terminal — don't ask a coding
+> agent to run it for you.** It needs to prompt you for your phone number
+> and then a login code in real time. In an agent's sandboxed terminal that
+> interactive back-and-forth commonly breaks silently, which looks exactly
+> like "the code never arrives" when the request never actually reached
+> Telegram. If you're working with an agent, have it print this command for
+> you to copy, then run it yourself.
+
+The code itself usually arrives as a message inside Telegram (from the
+official "Telegram" service chat, not SMS) if you're already logged in
+anywhere else — check there first before assuming it didn't send.
 
 ```bash
 ./venv/bin/python3 -c "
